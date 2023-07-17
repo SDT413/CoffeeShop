@@ -30,17 +30,17 @@ public class Product {
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "images", columnDefinition = "text")
     private List<String> images;
-    private Date created_at;
-    private Date updated_at;
+    private Date createdAt;
+    private Date updatedAt;
 
 @PrePersist
     protected void onCreate() {
-        this.created_at = new Date();
+        this.createdAt = new Date();
     }
 
 @PreUpdate
     protected void onUpdate() {
-        this.updated_at = new Date();
+        this.updatedAt = new Date();
     }
 
 }

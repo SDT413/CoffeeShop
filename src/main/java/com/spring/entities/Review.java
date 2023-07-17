@@ -25,17 +25,17 @@ public class Review {
     @JoinColumn(name = "product_id")
     @ToString.Exclude
     private Product product;
-    private Date created_at;
-    private Date updated_at;
+    private Date createdAt;
+    private Date updatedAt;
 
     @PrePersist
     protected void onCreate() {
-        this.created_at = new Date();
+        this.createdAt = new Date();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updated_at = new Date();
+        this.updatedAt = new Date();
     }
     @JsonBackReference
     public Product getProduct() {

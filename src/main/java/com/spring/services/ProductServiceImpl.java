@@ -5,6 +5,7 @@ import com.spring.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +21,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found with id " + id));
+    }
+
+    @Override
+    public List<Product> getAllButCurrent(Long id) {
+        return productRepository.findAllByIdNot(id);
     }
 
     @Override
@@ -70,4 +76,29 @@ public class ProductServiceImpl implements ProductService {
                 }).orElseThrow(() -> new RuntimeException("Product not found with id " + id));
 
     }
+    @Override
+    public List<Product> SearchProducts(String keyword) {
+        return productRepository.SearchProducts(keyword);
+    }
+
+    @Override
+    public List<Product> SortByIncreasingPrice() {
+        return productRepository.findAllByOrderByPriceAsc();
+    }
+
+    @Override
+    public List<Product> SortByDecreasingPrice() {
+        return productRepository.findAllByOrderByPriceDesc();
+    }
+
+    @Override
+    public List<Product> SortByNewest() {
+        return productRepository.findAllByOrderByCreatedAtDesc();
+    }
+    @Override
+    public List<Product> SortByOldest() {
+        return productRepository.findAllByOrderByCreatedAtAsc();
+    }
+
+
 }
