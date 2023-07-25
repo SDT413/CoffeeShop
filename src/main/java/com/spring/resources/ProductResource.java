@@ -13,11 +13,11 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductResource {
     private final ProductService productService;
-    private final ProductRepository productRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
@@ -29,7 +29,7 @@ public class ProductResource {
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
-    @PostMapping("/")
+    @PostMapping("")
     public void createProduct(@RequestBody Product product) {
         productService.createProduct(product);
     }
@@ -54,27 +54,21 @@ public class ProductResource {
     public List<Product> SearchProducts(@PathVariable String keyword) {
         return productService.SearchProducts(keyword);
     }
-    @GetMapping("/sort/price/asc")
+    @GetMapping("/sort=price&order=asc")
     public List<Product> SortByIncreasingPrice() {
         return productService.SortByIncreasingPrice();
     }
-    @GetMapping("/sort/price/desc")
+    @GetMapping("/sort=price&order=desc")
     public List<Product> SortByDecreasingPrice() {
         return productService.SortByDecreasingPrice();
     }
-    @GetMapping("/sort/oldest")
+    @GetMapping("/sort=date&order=asc")
     public List<Product> SortByOldest() {
         return productService.SortByOldest();
     }
-    @GetMapping("/sort/newest")
+    @GetMapping("/sort=date&order=desc")
     public List<Product> SortByNewest() {
         return productService.SortByNewest();
     }
-
-    @GetMapping("/allbutcurrent/{id}")
-    public List<Product> getAllButCurrent(@PathVariable Long id) {
-        return productService.getAllButCurrent(id);
-    }
-
 
 }

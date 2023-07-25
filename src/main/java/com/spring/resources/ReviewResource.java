@@ -10,9 +10,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReviewResource {
     private final ReviewService reviewService;
-    @GetMapping("/{productId}/reviews/")
+    @GetMapping("/{productId}/reviews")
     public List<Review> getAllReviews(@PathVariable("productId") Long productId) {
         return reviewService.getAllReviews(productId);
     }
@@ -20,7 +21,7 @@ public class ReviewResource {
     public Review getReviewById(@PathVariable("id") Long id, @PathVariable("productId") Long productId) {
         return reviewService.getReviewById(id, productId);
     }
-    @PostMapping("/{productId}/reviews/")
+    @PostMapping("/{productId}/reviews")
     public void createReview(@RequestBody Review review, @PathVariable("productId") Long productId) {
         reviewService.createReview(review, productId);
     }

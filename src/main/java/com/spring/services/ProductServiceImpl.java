@@ -1,6 +1,7 @@
 package com.spring.services;
 
 import com.spring.entities.Product;
+import com.spring.entities.Review;
 import com.spring.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found with id " + id));
     }
 
-    @Override
-    public List<Product> getAllButCurrent(Long id) {
-        return productRepository.findAllByIdNot(id);
-    }
 
     @Override
     public void createProduct(Product product) {
@@ -53,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findBySlug(String name) {
-        return productRepository.findBySlug(name);
+        return productRepository.findFirstBySlug(name);
     }
 
     @Override
@@ -99,6 +96,4 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> SortByOldest() {
         return productRepository.findAllByOrderByCreatedAtAsc();
     }
-
-
 }
